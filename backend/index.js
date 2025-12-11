@@ -21,19 +21,17 @@ const db = mysql.createPool({
     connectionLimit: 5
 });
 
-// --- AUTOMATIC DATABASE SETUP ---
+// --- DATABASE SETUP ---
 db.getConnection((err, connection) => {
     if (err) {
         console.error('❌ Database connection failed:', err.message);
     } else {
         console.log('✅ Connected to Clever Cloud MySQL Database');
         
-        // 1. DROP old table (To remove old columns like director/release_year)
         connection.query('DROP TABLE IF EXISTS movies', (err) => {
             if (err) console.error("Error dropping table:", err);
             else console.log("Old table dropped (if existed).");
 
-            // 2. CREATE new table with Question 2 requirements
             const createTableSQL = `CREATE TABLE movies (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 title VARCHAR(255) NOT NULL,
@@ -48,7 +46,7 @@ db.getConnection((err, connection) => {
                 else {
                     console.log("✅ New 'movies' table created successfully!");
 
-                    // 3. INSERT 5 Sample Records (Requirement from PDF)
+                    // INSERT 5 Sample Records
                     const checkSQL = 'SELECT COUNT(*) AS count FROM movies';
                     connection.query(checkSQL, (err, result) => {
                         if (result[0].count === 0) {
@@ -80,7 +78,7 @@ app.get('/', (req, res) => {
     res.send('MovieMania Backend is Running!');
 });
 
-// --- API ENDPOINTS (Updated for Set 2) ---
+// --- API ENDPOINTS ---
 
 // 1. GET /movies: Fetch all movies
 app.get('/movies', (req, res) => {
@@ -90,7 +88,7 @@ app.get('/movies', (req, res) => {
     });
 });
 
-// 2. GET /movies/:id: Fetch single movie (NEW REQUIREMENT)
+// 2. GET /movies/:id: Fetch single movie 
 app.get('/movies/:id', (req, res) => {
     const { id } = req.params;
     db.query('SELECT * FROM movies WHERE id = ?', [id], (err, result) => {
@@ -100,7 +98,7 @@ app.get('/movies/:id', (req, res) => {
     });
 });
 
-// 3. POST /movies: Add new movie (Updated columns)
+// 3. POST /movies: Add new movie 
 app.post('/movies', (req, res) => {
     const { title, genre, description, poster_url, rating } = req.body;
     if (!title) return res.status(400).json({ message: "Title is required" });
@@ -112,7 +110,7 @@ app.post('/movies', (req, res) => {
     });
 });
 
-// 4. PUT /movies/:id: Update movie (Updated columns)
+// 4. PUT /movies/:id: Update movie 
 app.put('/movies/:id', (req, res) => {
     const { title, genre, description, poster_url, rating } = req.body;
     const sql = 'UPDATE movies SET title=?, genre=?, description=?, poster_url=?, rating=? WHERE id=?';

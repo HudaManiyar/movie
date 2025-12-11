@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// USE YOUR RENDER URL
+// RENDER URL
 const API_URL = "https://movie-yld4.onrender.com"; 
 // const API_URL = "http://localhost:5000"; // Uncomment for local testing
 
@@ -118,7 +118,7 @@ function App() {
       {/* VIEW: HOME */}
       {view === 'home' && (
         <>
-          {/* --- HERO CAROUSEL (Text Left, Image Right - No Stretching) --- */}
+          {/* --- HERO CAROUSEL --- */}
           <div className="relative bg-gradient-to-r from-gray-900 to-gray-800 overflow-hidden border-b border-gray-700">
              {movies.length > 0 ? (
                 <div className="container mx-auto px-4 py-10 flex flex-col-reverse md:flex-row items-center gap-8 min-h-[450px]">
