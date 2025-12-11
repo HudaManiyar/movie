@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // RENDER URL
-// const API_URL = "https://movie-yld4.onrender.com"; 
-const API_URL = "http://localhost:5000"; // Uncomment for local testing
+const API_URL = "https://movie-yld4.onrender.com"; 
+// const API_URL = "http://localhost:5000"; // Uncomment for local testing
 
 function App() {
   const [movies, setMovies] = useState([]);
