@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // USE YOUR RENDER URL
-const API_URL = "https://your-movie-backend.onrender.com"; 
+const API_URL = "https://movie-yld4.onrender.com"; 
 // const API_URL = "http://localhost:5000"; // Uncomment for local testing
 
 function App() {
